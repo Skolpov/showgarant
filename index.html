@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Гарантия</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+		rel="stylesheet">
+	<style>
+		:root {
+			--clr1: #0070D5;
+			--brd-act: #93C3ED;
+			--title: #2A2A2A;
+			--text: #424242;
+		}
+
+
+		body {
+			font-family: 'Nunito Sans', sans-serif;
+			margin: 0;
+			padding: 20px;
+			background-color: #f5f5f5;
+		}
+
+		.cnt {
+			position: relative;
+			display: flex;
+			max-width: 1200px;
+			margin: 0 auto;
+			border-radius: 10px;
+			overflow: hidden;
+		}
+
+		.col-rgt {
+			position: relative;
+			box-sizing: border-box;
+			width: 525px;
+			padding: 32px 40px;
+			margin: 0 auto;
+			margin-top: 64px;
+			display: flex;
+			background-color: white;
+		}
+
+		.garant__wrap>.garant__opt:first-of-type {
+			border-top-left-radius: 16px;
+			border-bottom-left-radius: 16px;
+		}
+
+		.garant__wrap>.garant__opt:last-child {
+			padding-left: 40px;
+			border-top-right-radius: 16px;
+			border-bottom-right-radius: 16px;
+		}
+
+		.garant__wrap {
+			position: relative;
+			display: flex;
+		}
+
+		.ic-garant {
+			width: 56px;
+			height: 60px;
+			position: absolute;
+			top: 35%;
+			left: 49%;
+			transform: translateX(-50%);
+		}
+
+		.garant__opt {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			flex: 1;
+			border: 1px solid #e0e0e0;
+			background-color: white;
+			padding: 16px 32px 16px 32px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+
+		.garant__opt:hover {
+			background-color: #f5faff;
+			border-color: var(--brd-act);
+			color: red;
+		}
+
+		.garant__opt:hover .garant__title-top,
+		.garant__opt:hover .garant__title-btm,
+		.garant__opt:hover .garant__desc {
+			color: #2a6fc9;
+		}
+
+		.garant__opt.active {
+			background-color: #e1f0fa;
+			border-color: var(--brd-act);
+		}
+
+		.garant__opt.active .garant__title .garant__title-top,
+		.garant__opt.active .garant__title .garant__title-btm,
+		.garant__opt.active .garant__desc {
+			color: var(--clr1);
+		}
+
+		.garant__info {
+			margin-bottom: 8px;
+		}
+
+		.garant__title {
+			display: flex;
+			flex-direction: column;
+			margin-bottom: 4px;
+		}
+
+		.garant__title span {
+			margin-top: 0;
+			margin-bottom: 0;
+			font-size: 14px;
+			color: #333;
+		}
+
+		.garant__title-btm {
+			font-weight: 600;
+		}
+
+		.garant__desc {
+			margin-top: 0;
+			margin-bottom: 0;
+			font-size: 12px;
+			color: var(--text);
+			line-height: 130%;
+		}
+
+		.garant__btns {
+			display: flex;
+			gap: 4px;
+		}
+
+		.garant__btn-details,
+		.garant__btn-select {
+			padding: 4px 12px;
+			border-radius: 32px;
+			font-size: 11px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			border: none;
+		}
+
+		.garant__btn-details {
+			background-color: transparent;
+			color: var(--clr1);
+		}
+
+		.garant__btn-details:hover {
+			background-color: var(--clr1);
+			color: white;
+		}
+
+		.garant__btn-select {
+			background-color: white;
+			border: 1px solid var(--brd-act);
+			color: var(--clr1);
+		}
+
+		.garant__btn-select:hover {
+			background-color: var(--clr1);
+			border-color: var(--clr1);
+			color: white;
+		}
+
+		.active .garant__btn-select {
+			background-color: white;
+			color: var(--clr1);
+			border-color: white;
+		}
+
+		.modal {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
+			z-index: 1000;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.modal-content {
+			background-color: white;
+			padding: 30px;
+			border-radius: 8px;
+			max-width: 500px;
+			width: 90%;
+			position: relative;
+		}
+
+		.close-modal {
+			position: absolute;
+			top: 10px;
+			right: 15px;
+			font-size: 24px;
+			cursor: pointer;
+			color: #666;
+		}
+
+		.modal-title {
+			font-size: 24px;
+			margin-bottom: 15px;
+			color: var(--title);
+		}
+
+		.modal-text {
+			font-size: 16px;
+			color: var(--text);
+			line-height: 1.5;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="cnt">
+
+		<div class="col-rgt">
+			<div class="garant__wrap">
+				<img src="./img/ic.svg" class="ic-garant" alt="" width="56" height="60">
+				<div class="garant__opt" data-opt="lite">
+					<div class="garant__info">
+						<div class="garant__title">
+							<span class="garant__title-top">Pioneer Care
+								Lite</span> <span class="garant__title-btm"> на 2
+								года</span>
+						</div>
+						<p class="garant__desc">Все узлы, агрегаты и заводские дефекты, при соблюдении норм
+							эксплуатации.</p>
+					</div>
+					<div class="garant__btns">
+						<button class="garant__btn-select">Выбрать</button>
+						<button class="garant__btn-details">Подробнее</button>
+					</div>
+				</div>
+				<div class="garant__opt" data-opt="absolute">
+					<div class="garant__info">
+						<div class="garant__title">
+							<span class="garant__title-top">Pioneer Care Absolute</span> <span
+								class="garant__title-btm">
+								на 3
+								года</span>
+						</div>
+						<p class="garant__desc">Все узлы, агрегаты вне зависимости от типа повреждения.</p>
+					</div>
+					<div class="garant__btns">
+						<button class="garant__btn-select">Выбрать</button>
+						<button class="garant__btn-details">Подробнее</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal" id="modal">
+		<div class="modal-content">
+			<span class="close-modal">&times;</span>
+			<div class="modal-title" id="modal-title"></div>
+			<div class="modal-text" id="modal-text"></div>
+		</div>
+	</div>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			const options = document.querySelectorAll('.garant__opt');
+			const modal = document.getElementById('modal');
+			const modalTitle = document.getElementById('modal-title');
+			const modalText = document.getElementById('modal-text');
+			const closeModal = document.querySelector('.close-modal');
+
+			// Данные для модального окна
+			const modalData = {
+				lite: {
+					title: '«Pioneer Care Lite»',
+					text: 'Гарантия покрывает все узлы и агрегаты, а также заводские дефекты в течение 2 лет при условии соблюдения норм эксплуатации. Не покрывает повреждения, вызванные неправильным использованием или внешними факторами.'
+				},
+				absolute: {
+					title: '«Pioneer Care Absolute»',
+					text: 'Полная гарантия на все узлы и агрегаты в течение 3 лет, независимо от типа повреждения. Включает в себя даже случаи неправильной эксплуатации и повреждения, вызванные внешними факторами.'
+				}
+			};
+
+			// Обработчик выбора гарантии
+			options.forEach(option => {
+				const selectBtn = option.querySelector('.garant__btn-select');
+				const detailsBtn = option.querySelector('.garant__btn-details');
+				const optionType = option.getAttribute('data-opt');
+
+				// Клик по всей карточке или кнопке "Выбрать"
+				option.addEventListener('click', function (e) {
+					if (e.target === detailsBtn) return;
+
+					options.forEach(opt => opt.classList.remove('active'));
+					option.classList.add('active');
+				});
+
+				// Клик по кнопке "Подробнее"
+				detailsBtn.addEventListener('click', function (e) {
+					e.stopPropagation();
+					modalTitle.textContent = modalData[optionType].title;
+					modalText.textContent = modalData[optionType].text;
+					modal.style.display = 'flex';
+				});
+
+				// Отдельный обработчик для кнопки "Выбрать"
+				selectBtn.addEventListener('click', function (e) {
+					e.stopPropagation();
+					options.forEach(opt => opt.classList.remove('active'));
+					option.classList.add('active');
+				});
+			});
+
+			// Закрытие модального окна
+			closeModal.addEventListener('click', function () {
+				modal.style.display = 'none';
+			});
+
+			window.addEventListener('click', function (e) {
+				if (e.target === modal) {
+					modal.style.display = 'none';
+				}
+			});
+		});
+	</script>
+</body>
+
+</html>
