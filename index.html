@@ -13,6 +13,7 @@
 	<style>
 		:root {
 			--clr1: #0070D5;
+			--bg: #D9EAF9;
 			--brd-act: #93C3ED;
 			--title: #2A2A2A;
 			--text: #424242;
@@ -84,15 +85,16 @@
 		}
 
 		.garant__opt:hover {
-			background-color: #f5faff;
 			border-color: var(--brd-act);
-			color: red;
+			background-color: var(--bg);
 		}
 
 		.garant__opt:hover .garant__title-top,
 		.garant__opt:hover .garant__title-btm,
-		.garant__opt:hover .garant__desc {
+		.garant__opt:hover .garant__desc,
+		.garant__opt:hover .garant__btn-select {
 			color: #2a6fc9;
+			border-color: transparent;
 		}
 
 		.garant__opt.active {
@@ -152,7 +154,7 @@
 
 		.garant__btn-details {
 			background-color: transparent;
-			color: var(--clr1);
+			color: var(--text);
 		}
 
 		.garant__btn-details:hover {
@@ -162,8 +164,9 @@
 
 		.garant__btn-select {
 			background-color: white;
-			border: 1px solid var(--brd-act);
-			color: var(--clr1);
+			border: 1px solid #c4c4c4;
+			color: var(--text);
+			width: 72px;
 		}
 
 		.garant__btn-select:hover {
@@ -301,8 +304,13 @@
 				option.addEventListener('click', function (e) {
 					if (e.target === detailsBtn) return;
 
-					options.forEach(opt => opt.classList.remove('active'));
+					options.forEach(opt => {
+						opt.classList.remove('active');
+						const btn = opt.querySelector('.garant__btn-select');
+						btn.textContent = "Выбрать";
+					});
 					option.classList.add('active');
+					selectBtn.textContent = "Выбрано";
 				});
 
 				// Клик по кнопке "Подробнее"
@@ -316,8 +324,13 @@
 				// Отдельный обработчик для кнопки "Выбрать"
 				selectBtn.addEventListener('click', function (e) {
 					e.stopPropagation();
-					options.forEach(opt => opt.classList.remove('active'));
+					options.forEach(opt => {
+						opt.classList.remove('active');
+						const btn = opt.querySelector('.garant__btn-select');
+						btn.textContent = "Выбрать";
+					});
 					option.classList.add('active');
+					selectBtn.textContent = "Выбрано";
 				});
 			});
 
